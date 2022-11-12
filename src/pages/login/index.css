@@ -1,0 +1,102 @@
+.login {
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    background: #36D1DC;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #5B86E5, #36D1DC);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.login>.card {
+    /* border: 1px solid red; */
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.login>.card>form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    gap: 50px;
+    width: 70%;
+}
+
+.login>.card>form>h1 {
+    font-size: 40px;
+    color: white;
+}
+
+.login>.card>form>input {
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    border-bottom: .5px solid black;
+    background: transparent;
+    color: white;
+}
+
+::placeholder {
+    color: white;
+    opacity: 1;
+}
+
+.login>.card>form>button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background-color: blue;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    animation: bn53bounce 4s infinite;
+    cursor: pointer;
+    color: white;
+}
+
+@keyframes bn53bounce {
+
+    5%,
+    50% {
+        transform: scale(1);
+    }
+
+    10% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1);
+    }
+
+    20% {
+        transform: scale(1) rotate(-5deg);
+    }
+
+    25% {
+        transform: scale(1) rotate(5deg);
+    }
+
+    30% {
+        transform: scale(1) rotate(-3deg);
+    }
+
+    35% {
+        transform: scale(1) rotate(2deg);
+    }
+
+    40% {
+        transform: scale(1) rotate(0);
+    }
+}
