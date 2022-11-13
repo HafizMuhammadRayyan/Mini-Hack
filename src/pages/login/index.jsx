@@ -3,6 +3,8 @@ import { useState } from 'react'
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Dashboard from '../dashboard';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 
 const firebaseConfig = {
@@ -28,37 +30,51 @@ const auth = getAuth(app);
 function Login() {
 
 
-    const [adminEmail, setAdminEmail] = useState("");
-    const [adminPass, setAdminPass] = useState("");
     const [isLogin, setIsLogin] = useState(false);
-    const [messege, setMessege] = useState("");
-
-    const checkAdmin = (e) => {
-
-        e.preventDefault()
-        console.log("fun running");
-
-        const auth = getAuth();
-        signInWithEmailAndPassword(auth, adminEmail, adminPass)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                console.log(user);
-                setIsLogin(true);
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                const ErrorMessage00 = errorMessage.split('/')
-                console.log("ErrorMessage ", ErrorMessage00[1].slice(0, -2));
-                setMessege(ErrorMessage00[1].slice(0, -2))
-
-            });
 
 
-    }
-    // console.log(isLogin);
+    const validationSchema = yup.object({
+        loginEmail: yup
+            .string("Enter email address")
+            .email("Please enter valid address")
+            .required("Login email is required"),
+        LoginPassword: yup
+            .string("Enter login password")
+            .min(6, "Only 6 digit characters are allowed")
+            .max(6, "Only 6 digit characters are allowed")
+            .required("Login password is required"),
+    });
+
+
+    const formik = useFormik({
+        initialValues: {
+            loginEmail: "",
+            LoginPassword: ""
+        },
+        validationSchema: validationSchema,
+        onSubmit: (values) => {
+            console.log(values);
+
+            const auth = getAuth();
+            signInWithEmailAndPassword(auth, values.loginEmail, values.LoginPassword)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    console.log(user);
+                    setIsLogin(true);
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    const ErrorMessage00 = errorMessage.split('/')
+                    console.log("ErrorMessage ", ErrorMessage00[1].slice(0, -2));
+                    setMessege(ErrorMessage00[1].slice(0, -2))
+
+                });
+
+        }
+    })
 
 
     return (
@@ -68,26 +84,42 @@ function Login() {
 
                     <div className="card">
 
+                        <h1>Admin Login</h1>
+                        <form onSubmit={formik.handleSubmit}>
 
-                        <form onSubmit={checkAdmin}>
-                            <h1>Admin Login</h1>
-                            <input
-                                type="text"
-                                name=''
-                                placeholder='Email address'
-                                onChange={(e) => {
-                                    setAdminEmail(e.target.value)
-                                }}
-                            />
-                            <input
-                                type="password"
-                                placeholder='6 digit password'
-                                onChange={(e) => {
-                                    setAdminPass(e.target.value)
-                                }}
-                            />
+                            <div className="inputField">
+                                <input
+                                    type="text"
+                                    name='loginEmail'
+                                    placeholder='Email address'
+                                    onChange={formik.handleChange}
+                                    value={formik.values.loginEmail}
+                                />
+                                {
+                                    (formik.touched.loginEmail && Boolean(formik.errors.loginEmail)) ?
+                                        <span>{formik.errors.loginEmail}</span>
+                                        :
+                                        null
+                                }
+                            </div>
+
+                            <div className="inputField">
+                                <input
+                                    type="password"
+                                    placeholder='6 digit password'
+                                    name='LoginPassword'
+                                    onChange={formik.handleChange}
+                                    value={formik.values.LoginPassword}
+                                />
+                                {
+                                    (formik.touched.LoginPassword && Boolean(formik.errors.LoginPassword)) ?
+                                        <span>{formik.errors.LoginPassword}</span>
+                                        :
+                                        null
+                                }
+                            </div>
+
                             <button type="submit" >Login</button>
-                            <h3 id='errMessege' style={{ color: "red" }}>{messege}</h3>
                         </form>
 
                     </div>
