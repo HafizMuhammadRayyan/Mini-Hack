@@ -31,6 +31,7 @@ function Login() {
 
 
     const [isLogin, setIsLogin] = useState(false);
+    const [authError, setAuthError] = useState('');
 
 
     const validationSchema = yup.object({
@@ -53,14 +54,14 @@ function Login() {
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            console.log(values);
+            // console.log(values);
 
             const auth = getAuth();
             signInWithEmailAndPassword(auth, values.loginEmail, values.LoginPassword)
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
-                    console.log(user);
+                    // console.log(user);
                     setIsLogin(true);
                     // ...
                 })
@@ -68,9 +69,7 @@ function Login() {
                     const errorCode = error.code;
                     const errorMessage = error.message;
                     const ErrorMessage00 = errorMessage.split('/')
-                    console.log("ErrorMessage ", ErrorMessage00[1].slice(0, -2));
-                    setMessege(ErrorMessage00[1].slice(0, -2))
-
+                    setAuthError(ErrorMessage00[1].slice(0, -2))
                 });
 
         }
@@ -96,8 +95,10 @@ function Login() {
                                     value={formik.values.loginEmail}
                                 />
                                 {
-                                    (formik.touched.loginEmail && Boolean(formik.errors.loginEmail)) ?
-                                        <span>{formik.errors.loginEmail}</span>
+                                    (formik.touched.loginEmail && Boolean(formik.errors.loginEmail)
+                                        || Boolean(authError === "user-not-found")
+                                    ) ?
+                                        <span>{formik.errors.loginEmail || authError}</span>
                                         :
                                         null
                                 }
@@ -112,8 +113,10 @@ function Login() {
                                     value={formik.values.LoginPassword}
                                 />
                                 {
-                                    (formik.touched.LoginPassword && Boolean(formik.errors.LoginPassword)) ?
-                                        <span>{formik.errors.LoginPassword}</span>
+                                    (formik.touched.LoginPassword && Boolean(formik.errors.LoginPassword)
+                                        || Boolean(authError === "wrong-password")
+                                    ) ?
+                                        <span>{formik.errors.LoginPassword || authError}</span>
                                         :
                                         null
                                 }

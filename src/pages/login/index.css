@@ -17,7 +17,7 @@
 .login>.card {
     /* border: 1px solid red; */
     width: 500px;
-    min-height: 450px;
+    min-height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,9 +36,9 @@
     width: 70%;
 }
 
-@media only screen and (max-width: 499px){
-    .login>.card>form{
-        width: 85%;  
+@media only screen and (max-width: 499px) {
+    .login>.card>form {
+        width: 85%;
     }
 }
 
@@ -54,7 +54,7 @@
     gap: 10px;
 }
 
-.login>.card>form>div>span{
+.login>.card>form>div>span {
     color: rgb(226, 0, 0);
     font-size: 14px;
 }
