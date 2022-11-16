@@ -76,10 +76,10 @@
 
 .login>.card>form>button {
     width: 100%;
-    padding: 15px;
+    padding: 13px;
     border: none;
     background-color: blue;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 500;
     animation: bn53bounce 4s infinite;
     cursor: pointer;
     color: white;
