@@ -1,0 +1,80 @@
+$text-color: white;
+
+@mixin red-border {
+    border: 1px solid red;
+}
+
+@mixin red-white {
+    border: 1px solid white;
+}
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-center-column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column
+}
+
+.classAddBody{
+    @include red-border;
+    @include flex-center-column;
+    width: 100%;
+    min-height: calc(100vh - 90px);
+}
+
+// .classAdd>.classAddBody{
+//     /* border: 1px solid white; */
+//     width: 100%;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     flex-direction: column;
+//     color: $text-color;    
+//     gap: 20px;
+//     margin-top: 10px;
+// }
+
+// .classAdd>.classAddBody>form{
+//     /* border: 1px solid white; */
+//     width: 60%;
+//     display: flex;
+//     gap: 30px;
+//     /* align-items: center; */
+//     /* flex-direction: column; */
+//     justify-content: center;
+//     flex-wrap: wrap;
+// }
+
+// .classAdd>.classAddBody>h1{
+//     font-size: 50px;
+//     display: flex;
+//     flex-direction: column;
+// }
+
+// .classAdd>.classAddBody>form>div{
+//     display: flex;
+//     flex-direction: column;
+//     flex-wrap: wrap;
+//     /* width: 100%; */
+// }
+
+// .classAdd>.classAddBody>form>div>label{
+//     font-size: 20px;
+// }
+
+// .classAdd>.classAddBody>form>div>input{
+//     width: 300px;
+//     padding: 10px 15px;
+// }
+
+// .classAdd>.classAddBody>form>.fullWight{
+//     width: 100%;
+//     border: 1px solid red;
+// }
+

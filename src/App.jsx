@@ -4,7 +4,7 @@ import './App.css'
 // Pages import
 import Login from './pages/login'
 import Dashboard from './pages/dashboard';
-import ClassAdding from './pages/classAdding';
+import Class from './pages/class';
 import Attendance from './pages/attendance';
 import About from './pages/about';
 
@@ -20,7 +20,7 @@ function App() {
       <Routes>
           <Route path="/" element={<Login/>} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/classAdding" element={<ClassAdding/>} />
+          <Route path="/classAdding" element={<Class/>} />
           <Route path="/attendance" element={<Attendance/>} />
           <Route path="/about" element={<About/>} />
           <Route path="*" element={

@@ -6,6 +6,10 @@ import Dashboard from '../dashboard';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
+// import react-toastify 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyB9rnBcgX-4kNfUcwGBRm8-Q1DKq8fWP2s",
@@ -37,7 +41,7 @@ function Login() {
     const validationSchema = yup.object({
         loginEmail: yup
             .string("Enter email address")
-            .email("Please enter valid address")
+            .email("Please enter valid email address")
             .required("Login email is required"),
         LoginPassword: yup
             .string("Enter login password")
@@ -63,6 +67,16 @@ function Login() {
                     const user = userCredential.user;
                     // console.log(user);
                     setIsLogin(true);
+                    toast.success('Login Successfully', {
+                        position: "top-right",
+                        autoClose: 1110,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    });
                     // ...
                 })
                 .catch((error) => {
@@ -70,6 +84,16 @@ function Login() {
                     const errorMessage = error.message;
                     const ErrorMessage00 = errorMessage.split('/')
                     setAuthError(ErrorMessage00[1].slice(0, -2))
+                    toast.error(ErrorMessage00[1].slice(0, -2), {
+                        position: "top-right",
+                        autoClose: 1110,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    });
                 });
 
         }
@@ -130,6 +154,7 @@ function Login() {
                 </div>
 
             }
+            <ToastContainer />
         </div>
     )
 
